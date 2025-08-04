@@ -1,0 +1,42 @@
+// client_competitive.cfg
+// Enforce uniform 33 ms LERP for all players
+
+// Network rate settings for 100-tick servers
+rate             "100000"   // Max bytes/sec from server
+cl_updaterate    "100"      // Server update packets/sec
+cl_cmdrate       "100"      // Client command packets/sec
+
+// Fixed LERP settings (competitive)
+cl_interp        "0.033"    // 33 ms interpolation window :contentReference[oaicite:0]{index=0}
+cl_interp_ratio  "2"        // 2 ticks → final lerp = 2/100 = 0.02 s :contentReference[oaicite:1]{index=1}
+
+// Confirmation alias (no cycling)
+alias "lerp33" "cl_interp 0.033; cl_interp_ratio 2; echo [LERP: 33ms - Competitive]" :contentReference[oaicite:2]{index=2}
+alias "lerp"   "lerp33"                                          :contentReference[oaicite:3]{index=3}
+
+// Network debugging
+alias "netinfo"      "net_graph 1; developer 1; echo [Network Info Enabled]" :contentReference[oaicite:4]{index=4}
+alias "netinfo_off"  "net_graph 0; developer 0; echo [Network Info Disabled]" :contentReference[oaicite:5]{index=5}
+
+// Show current settings
+alias "showrates"    "echo; echo Current Network Settings:; echo ========================; \
+cl_interp; cl_interp_ratio; cl_updaterate; cl_cmdrate; rate; echo ========================" :contentReference[oaicite:6]{index=6}
+
+// Keybinds (requires developer console enabled)
+bind "F5" "lerp"            // Confirm LERP setting :contentReference[oaicite:7]{index=7}
+bind "F6" "showrates"       // Print current rates :contentReference[oaicite:8]{index=8}
+bind "F7" "netinfo"         // Toggle net_graph on :contentReference[oaicite:9]{index=9}
+bind "F8" "netinfo_off"     // Toggle net_graph off :contentReference[oaicite:10]{index=10}
+
+// Load confirmation
+echo " "
+echo "================================================"
+echo "   Competitive Client Config Loaded"
+echo "   Fixed LERP: 33ms (cl_interp 0.033; cl_interp_ratio 2)"
+echo "   Rate: 100k | Updaterate/Cmdrate: 100"
+echo "------------------------------------------------"
+echo "   F5 - Confirm LERP (echo)"
+echo "   F6 - Show current rates"
+echo "   F7/F8 - Toggle network info"
+echo "================================================"
+echo " "
